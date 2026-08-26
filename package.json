@@ -8,6 +8,7 @@
     "dev": "node --env-file-if-exists=.env --watch app.js",
     "studio": "npx prisma studio --config ./prisma7.config.js",
     "migrate": "npx prisma migrate dev",
+    "generate": "npx prisma generate",
     "start": "node app.js"
   },
   "repository": {

@@ -20,20 +20,6 @@ async function main() {
   // });
   // console.log("Created user:", user);
 
-  // const comment = await prisma.user.create({
-  //   data: {
-  //     email: "julek@gmail.com",
-  //     username: "Julek",
-  //     password: "123",
-  //     comments: {
-  //       create: {
-  //         text: "first comment",
-  //         postId: 4,
-  //       },
-  //     },
-  //   },
-  // });
-
   const allUsers = await prisma.user.findMany({
     include: {
       posts: true,

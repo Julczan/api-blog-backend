@@ -6,12 +6,23 @@ class Post {
       where: {
         id: +id,
       },
+      include: {
+        author: true,
+        comments: {
+          select: {
+            text: true,
+            author: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
     });
     return post;
   }
 
   async findAll() {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({});
     return posts;
   }
 }
