@@ -4,6 +4,9 @@ const cors = require("cors");
 const models = require("./models/index");
 const routes = require("./routes/index");
 
+require("dotenv/config");
+require("./config/passport");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
