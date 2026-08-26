@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/posts", routes.post);
+app.use("/user", routes.user);
 
 app.use((error, req, res, next) => {
   return res.status(500).json({ error: error.toString() });

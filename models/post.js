@@ -1,6 +1,11 @@
 const { prisma } = require("../lib/prisma");
 
 class Post {
+  async findAll() {
+    const posts = await prisma.post.findMany({});
+    return posts;
+  }
+
   async findById(id) {
     const post = await prisma.post.findUnique({
       where: {
@@ -19,11 +24,6 @@ class Post {
       },
     });
     return post;
-  }
-
-  async findAll() {
-    const posts = await prisma.post.findMany({});
-    return posts;
   }
 }
 
