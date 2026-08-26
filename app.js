@@ -1,7 +1,25 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+const models = require("./models/index");
+const routes = require("./routes/index");
 
-app.get("/", (req, res) => res.send("Hello, world!"));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  req.context = {
+    models,
+  };
+  next();
+});
+
+app.use("/posts", routes.post);
+
+app.use((error, req, res, next) => {
+  return res.status(500).json({ error: error.toString() });
+});
 
 const PORT = 3000;
 app.listen(PORT, (error) => {
