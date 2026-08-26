@@ -9,13 +9,13 @@ passport.use(
       const user = await models.User.findByUsername(username);
 
       if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+        return done(null, false);
       }
 
       const match = await validatePassword(password, user.password);
 
       if (!match) {
-        return done(null, false, { message: "Incorrect password" });
+        return done(null, false);
       }
 
       return done(null, user);

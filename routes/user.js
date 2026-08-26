@@ -9,8 +9,8 @@ router.post(
   "/login",
   passport.authenticate("local", {
     session: false,
-    successRedirect: "/posts",
   }),
+  controllers.userController.signToken,
 );
 
 module.exports = router;

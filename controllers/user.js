@@ -1,5 +1,6 @@
 const { body, validationResult, matchedData } = require("express-validator");
 const { generatePassword } = require("../lib/passwordUtils");
+const jwt = require("jsonwebtoken");
 
 const lengthErr = "must be between 1 and 15 characters!";
 
@@ -53,4 +54,10 @@ const signUpUser = [
   },
 ];
 
-module.exports = { signUpUser };
+function signToken(req, res, next) {
+  const user = req.user;
+  const token = jwt.sign({ user: user }, process.env.JWT_SECRET);
+  return res.json({ user, token });
+}
+
+module.exports = { signUpUser, signToken };
