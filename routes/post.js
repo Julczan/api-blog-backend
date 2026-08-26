@@ -3,6 +3,7 @@ const controllers = require("../controllers/index");
 
 const router = Router();
 
-router.get("/", controllers.PostController.findAll);
+router.get("/", controllers.postController.findAll);
+router.get("/:postId", controllers.postController.findById);
 
 module.exports = router;

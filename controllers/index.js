@@ -1,9 +1,7 @@
-const { findAll } = require("./post");
+const postController = require("./post");
 
 const controllers = {
-  PostController: {
-    findAll,
-  },
+  postController,
 };
 
 module.exports = controllers;
