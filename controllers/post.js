@@ -8,4 +8,11 @@ async function findById(req, res, next) {
   return res.json(posts);
 }
 
-module.exports = { findAll, findById };
+async function create(req, res, next) {
+  const { title, text } = req.body;
+  const authorId = req.user.id;
+  const post = await req.context.models.Post.create({ title, text, authorId });
+  return res.json(post);
+}
+
+module.exports = { findAll, findById, create };

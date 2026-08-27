@@ -25,6 +25,16 @@ class Post {
     });
     return post;
   }
+  
+
+async create({title, text, authorId}){
+const post = await prisma.post.create({
+data:{
+title, text, authorId
+}
+})
+return post;
+}
 }
 
 module.exports = new Post();

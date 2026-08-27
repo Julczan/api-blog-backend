@@ -60,4 +60,12 @@ function signToken(req, res, next) {
   return res.json({ user, token });
 }
 
-module.exports = { signUpUser, signToken };
+function checkRole(req, res, next) {
+  if (req.user.role === "CREATOR") {
+    next();
+  } else {
+    res.status(400).json("Unauthorized");
+  }
+}
+
+module.exports = { signUpUser, signToken, checkRole };
