@@ -68,4 +68,24 @@ function checkRole(req, res, next) {
   }
 }
 
-module.exports = { signUpUser, signToken, checkRole };
+async function checkIfAuthor(req, res, next) {
+  const { postId, commentId } = req.params;
+
+  let authorId = "";
+
+  if (!commentId) {
+    const { author } = await req.context.models.Post.findById(postId);
+    authorId = author.id;
+  } else {
+    const { author } = await req.context.models.Comment.findById(commentId);
+    authorId = author.id;
+  }
+
+  if (req.user.id === authorId) {
+    next();
+  } else {
+    res.status(400).json("Unauthorized");
+  }
+}
+
+module.exports = { signUpUser, signToken, checkRole, checkIfAuthor };

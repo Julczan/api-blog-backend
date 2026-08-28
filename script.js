@@ -19,16 +19,13 @@ async function main() {
   //   },
   // });
   // console.log("Created user:", user);
-
-  const user = await prisma.user.update({
-    where: { id: 6 },
-    data: {
-      role: "CREATOR",
-    },
-  });
-
-  console.log(user);
-
+  // const user = await prisma.user.update({
+  //   where: { id: 6 },
+  //   data: {
+  //     role: "CREATOR",
+  //   },
+  // });
+  // console.log(user);
   // const allUsers = await prisma.user.findMany({
   //   include: {
   //     posts: true,
