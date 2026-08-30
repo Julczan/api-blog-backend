@@ -42,7 +42,11 @@ class Post {
         id: +id,
       },
       include: {
-        comments: true,
+        comments: {
+          include: {
+            author: true,
+          },
+        },
       },
     });
     return comments;
