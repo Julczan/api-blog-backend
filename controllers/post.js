@@ -9,8 +9,13 @@ async function findAllPublished(req, res, next) {
 }
 
 async function findById(req, res, next) {
-  const posts = await req.context.models.Post.findById(req.params.postId);
-  return res.json(posts);
+  const post = await req.context.models.Post.findById(req.params.postId);
+
+  if (!post) {
+    return res.status(404).json("Post not found");
+  }
+
+  return res.json(post);
 }
 
 async function create(req, res, next) {
