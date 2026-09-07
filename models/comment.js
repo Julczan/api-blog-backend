@@ -1,13 +1,10 @@
 const { prisma } = require("../lib/prisma");
 
 class Comment {
-  async findById(id) {
-    const comment = await prisma.comment.findUnique({
+  async findById(postId, commentId) {
+    const comment = await prisma.comment.findFirst({
       where: {
-        id: +id,
-      },
-      include: {
-        author: true,
+        AND: [{ postId: +postId, id: +commentId }],
       },
     });
     return comment;

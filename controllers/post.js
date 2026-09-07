@@ -12,7 +12,7 @@ async function findById(req, res, next) {
   const post = await req.context.models.Post.findById(req.params.postId);
 
   if (!post) {
-    return res.status(404).json("Post not found");
+    return res.status(404).json({ message: "Post not found" });
   }
 
   return res.json(post);
@@ -29,6 +29,7 @@ async function findAllComments(req, res, next) {
   const comments = await req.context.models.Post.findAllComments(
     req.params.postId,
   );
+
   return res.json(comments);
 }
 

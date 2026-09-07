@@ -37,16 +37,12 @@ class Post {
   }
 
   async findAllComments(id) {
-    const comments = await prisma.post.findUnique({
+    const comments = await prisma.comment.findMany({
       where: {
-        id: +id,
+        postId: +id,
       },
       include: {
-        comments: {
-          include: {
-            author: true,
-          },
-        },
+        author: true,
       },
     });
     return comments;

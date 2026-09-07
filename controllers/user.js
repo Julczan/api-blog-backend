@@ -40,7 +40,8 @@ const signUpUser = [
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json(errors);
+      const errorsArray = errors.errors;
+      return res.status(400).json(errorsArray);
     }
     const { username, email, password } = matchedData(req);
     const hashedPassword = await generatePassword(password);
