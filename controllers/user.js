@@ -89,4 +89,14 @@ async function checkIfAuthor(req, res, next) {
   }
 }
 
-module.exports = { signUpUser, signToken, checkRole, checkIfAuthor };
+async function failedLogin(req, res, next) {
+  res.status(401).json({ msg: "Invalid username or password" });
+}
+
+module.exports = {
+  signUpUser,
+  signToken,
+  checkRole,
+  checkIfAuthor,
+  failedLogin,
+};

@@ -9,8 +9,11 @@ router.post(
   "/login",
   passport.authenticate("local", {
     session: false,
+    failureRedirect: "/user/failedlogin",
   }),
   controllers.userController.signToken,
 );
+
+router.get("/failedlogin", controllers.userController.failedLogin);
 
 module.exports = router;
