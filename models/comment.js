@@ -6,6 +6,7 @@ class Comment {
       where: {
         AND: [{ postId: +postId, id: +commentId }],
       },
+      include: { author: true },
     });
     return comment;
   }

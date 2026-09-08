@@ -59,7 +59,7 @@ class Post {
           },
         },
       },
-      include: {
+      select: {
         comments: true,
       },
     });

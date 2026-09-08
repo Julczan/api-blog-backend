@@ -90,7 +90,7 @@ async function checkIfAuthor(req, res, next) {
 }
 
 async function failedLogin(req, res, next) {
-  res.status(401).json({ msg: "Invalid username or password" });
+  return res.status(401).json({ msg: "Invalid username or password" });
 }
 
 module.exports = {

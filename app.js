@@ -22,7 +22,8 @@ app.use("/posts", routes.post);
 app.use("/user", routes.user);
 
 app.use((error, req, res, next) => {
-  return res.status(500).json({ error: error.toString() });
+  const statusCode = error.status || 500;
+  return res.status(statusCode).json({ error: error.toString() });
 });
 
 const PORT = 3000;
