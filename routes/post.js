@@ -27,7 +27,7 @@ router.post(
     session: false,
     failWithError: true,
   }),
-  controllers.postController.createComment,
+  controllers.commentController.create,
 );
 
 router.put(

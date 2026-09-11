@@ -48,24 +48,6 @@ class Post {
     return comments;
   }
 
-  async createComment({ id, text, authorId }) {
-    const comment = await prisma.post.update({
-      where: { id: +id },
-      data: {
-        comments: {
-          create: {
-            text,
-            authorId,
-          },
-        },
-      },
-      select: {
-        comments: true,
-      },
-    });
-    return comment;
-  }
-
   async update({ id, title, text }) {
     const post = await prisma.post.update({
       where: { id: +id },

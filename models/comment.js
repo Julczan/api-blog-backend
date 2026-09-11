@@ -11,6 +11,17 @@ class Comment {
     return comment;
   }
 
+  async create({ postId, text, authorId }) {
+    const comment = await prisma.comment.create({
+      data: {
+        postId: +postId,
+        text,
+        authorId,
+      },
+    });
+    return comment;
+  }
+
   async update({ id, text }) {
     const comment = await prisma.comment.update({
       where: {

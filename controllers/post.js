@@ -33,18 +33,6 @@ async function findAllComments(req, res, next) {
   return res.json(comments);
 }
 
-async function createComment(req, res, next) {
-  const { text } = req.body;
-  const { postId } = req.params;
-  const authorId = req.user.id;
-  const comment = await req.context.models.Post.createComment({
-    id: postId,
-    text,
-    authorId,
-  });
-  return res.json(comment);
-}
-
 async function update(req, res, next) {
   const { postId } = req.params;
   const { title, text } = req.body;
@@ -69,7 +57,6 @@ module.exports = {
   findById,
   create,
   findAllComments,
-  createComment,
   update,
   deletePost,
 };
