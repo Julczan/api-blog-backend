@@ -34,9 +34,11 @@ class Comment {
     return comment;
   }
 
-  async delete(id) {
-    const post = await prisma.comment.delete({
-      where: { id: +id },
+  async delete({ postId, commentId }) {
+    const post = await prisma.comment.deleteMany({
+      where: {
+        AND: [{ postId: +postId, id: +commentId }],
+      },
     });
     return post;
   }

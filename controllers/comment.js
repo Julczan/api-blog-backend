@@ -37,8 +37,8 @@ async function update(req, res, next) {
 }
 
 async function deleteComment(req, res, next) {
-  const { commentId } = req.params;
-  const post = await req.context.models.Comment.delete(commentId);
+  const { postId, commentId } = req.params;
+  const post = await req.context.models.Comment.delete({ postId, commentId });
   return res.json("Comment deleted!");
 }
 
