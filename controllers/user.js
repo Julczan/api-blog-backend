@@ -65,7 +65,7 @@ function checkRole(req, res, next) {
   if (req.user.role === "CREATOR") {
     next();
   } else {
-    res.status(400).json("Unauthorized");
+    res.status(400).json({ error: "Invalid user role" });
   }
 }
 
