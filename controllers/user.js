@@ -69,23 +69,42 @@ function checkRole(req, res, next) {
   }
 }
 
-async function checkIfAuthor(req, res, next) {
-  const { postId, commentId } = req.params;
+async function checkIfPostAuthor(params) {
+  const { postId } = req.params;
 
   let authorId = "";
+  const post = await req.context.models.Post.findById(postId);
 
-  if (!commentId) {
-    const { author } = await req.context.models.Post.findById(postId);
-    authorId = author.id;
-  } else {
-    const { author } = await req.context.models.Comment.findById(commentId);
-    authorId = author.id;
+  if (!post) {
+    return res.status(401).json({ error: "Post not found" });
   }
+  authorId = post.author.id;
 
   if (req.user.id === authorId) {
     next();
   } else {
-    res.status(400).json("Unauthorized");
+    return res.status(401).json({ error: "AuthenticationError: Unauthorized" });
+  }
+}
+
+async function checkIfCommentAuthor(req, res, next) {
+  const { postId, commentId } = req.params;
+
+  let authorId = "";
+
+  const comment = await req.context.models.Comment.findById({
+    postId,
+    commentId,
+  });
+  if (!comment) {
+    return res.status(401).json({ error: "Comment not found" });
+  }
+  authorId = comment.author.id;
+
+  if (req.user.id === authorId) {
+    next();
+  } else {
+    return res.status(401).json({ error: "AuthenticationError: Unauthorized" });
   }
 }
 
@@ -97,6 +116,7 @@ module.exports = {
   signUpUser,
   signToken,
   checkRole,
-  checkIfAuthor,
+  checkIfPostAuthor,
+  checkIfCommentAuthor,
   failedLogin,
 };

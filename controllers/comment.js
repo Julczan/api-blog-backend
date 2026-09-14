@@ -1,7 +1,10 @@
 async function findById(req, res, next) {
   const { postId, commentId } = req.params;
 
-  const comment = await req.context.models.Comment.findById(postId, commentId);
+  const comment = await req.context.models.Comment.findById({
+    postId,
+    commentId,
+  });
 
   if (!comment) {
     return res.status(404).json({ message: "Comment not found" });
@@ -22,11 +25,12 @@ async function create(req, res, next) {
 }
 
 async function update(req, res, next) {
-  const { commentId } = req.params;
+  const { commentId, postId } = req.params;
   const { text } = req.body;
 
   const comment = await req.context.models.Comment.update({
-    id: commentId,
+    commentId,
+    postId,
     text,
   });
   return res.json(comment);

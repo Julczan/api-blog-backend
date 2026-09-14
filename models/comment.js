@@ -1,7 +1,7 @@
 const { prisma } = require("../lib/prisma");
 
 class Comment {
-  async findById(postId, commentId) {
+  async findById({ postId, commentId }) {
     const comment = await prisma.comment.findFirst({
       where: {
         AND: [{ postId: +postId, id: +commentId }],
@@ -22,10 +22,10 @@ class Comment {
     return comment;
   }
 
-  async update({ id, text }) {
-    const comment = await prisma.comment.update({
+  async update({ commentId, postId, text }) {
+    const comment = await prisma.comment.updateMany({
       where: {
-        id: +id,
+        AND: [{ postId: +postId, id: +commentId }],
       },
       data: {
         text,

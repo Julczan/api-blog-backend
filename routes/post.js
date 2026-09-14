@@ -34,28 +34,28 @@ router.put(
   "/:postId",
   passport.authenticate("jwt", { session: false, failWithError: true }),
   controllers.userController.checkRole,
-  controllers.userController.checkIfAuthor,
+  controllers.userController.checkIfPostAuthor,
   controllers.postController.update,
 );
 
 router.put(
   "/:postId/comments/:commentId",
   passport.authenticate("jwt", { session: false, failWithError: true }),
-  controllers.userController.checkIfAuthor,
+  controllers.userController.checkIfCommentAuthor,
   controllers.commentController.update,
 );
 
 router.delete(
   "/:postId",
   passport.authenticate("jwt", { session: false, failWithError: true }),
-  controllers.userController.checkIfAuthor,
+  controllers.userController.checkIfPostAuthor,
   controllers.postController.deletePost,
 );
 
 router.delete(
   "/:postId/comments/:commentId",
   passport.authenticate("jwt", { session: false, failWithError: true }),
-  controllers.userController.checkIfAuthor,
+  controllers.userController.checkIfCommentAuthor,
   controllers.commentController.deleteComment,
 );
 
