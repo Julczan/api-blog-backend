@@ -65,6 +65,22 @@ class Post {
     });
     return post;
   }
+
+  async publish(id) {
+    const post = await prisma.post.findUnique({
+      where: { id: +id },
+    });
+    if (!post) {
+      return;
+    }
+    const updatedPost = await prisma.post.update({
+      where: { id: +id },
+      data: {
+        published: post.published === true ? false : true,
+      },
+    });
+    return updatedPost;
+  }
 }
 
 module.exports = new Post();

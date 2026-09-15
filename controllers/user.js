@@ -69,7 +69,7 @@ function checkRole(req, res, next) {
   }
 }
 
-async function checkIfPostAuthor(params) {
+async function checkIfPostAuthor(req, res, next) {
   const { postId } = req.params;
 
   let authorId = "";

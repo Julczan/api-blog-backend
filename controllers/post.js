@@ -51,6 +51,15 @@ async function deletePost(req, res, next) {
   return res.json("Post deleted!");
 }
 
+async function publish(req, res, next) {
+  const { postId } = req.params;
+  const post = await req.context.models.Post.publish(postId);
+  if (!post) {
+    return res.status(401).json({ error: "Post not found" });
+  }
+  return res.json(post);
+}
+
 module.exports = {
   findAll,
   findAllPublished,
@@ -59,4 +68,5 @@ module.exports = {
   findAllComments,
   update,
   deletePost,
+  publish,
 };

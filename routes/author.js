@@ -11,4 +11,12 @@ router.get(
   controllers.postController.findAll,
 );
 
+router.post(
+  "/posts/:postId/publish",
+  passport.authenticate("jwt", { session: false, failWithError: true }),
+  controllers.userController.checkRole,
+  controllers.userController.checkIfPostAuthor,
+  controllers.postController.publish,
+);
+
 module.exports = router;
