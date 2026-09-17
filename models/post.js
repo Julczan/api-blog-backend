@@ -25,6 +25,19 @@ class Post {
     return post;
   }
 
+  async findPublishedById(id) {
+    const post = await prisma.post.findUnique({
+      where: {
+        id: +id,
+        published: true,
+      },
+      include: {
+        author: true,
+      },
+    });
+    return post;
+  }
+
   async create({ title, text, authorId }) {
     const post = await prisma.post.create({
       data: {
@@ -40,6 +53,21 @@ class Post {
     const comments = await prisma.comment.findMany({
       where: {
         postId: +id,
+      },
+      include: {
+        author: true,
+      },
+    });
+    return comments;
+  }
+
+  async findAllPublishedComments(id) {
+    const comments = await prisma.comment.findMany({
+      where: {
+        postId: +id,
+        post: {
+          published: true,
+        },
       },
       include: {
         author: true,

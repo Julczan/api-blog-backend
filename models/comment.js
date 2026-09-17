@@ -11,6 +11,20 @@ class Comment {
     return comment;
   }
 
+  async findPublishedById({ postId, commentId }) {
+    const comment = await prisma.comment.findFirst({
+      where: {
+        postId: +postId,
+        id: +commentId,
+        post: {
+          published: true,
+        },
+      },
+      include: { author: true },
+    });
+    return comment;
+  }
+
   async create({ postId, text, authorId }) {
     const comment = await prisma.comment.create({
       data: {

@@ -18,6 +18,18 @@ async function findById(req, res, next) {
   return res.json(post);
 }
 
+async function findPublishedById(req, res, next) {
+  const post = await req.context.models.Post.findPublishedById(
+    req.params.postId,
+  );
+
+  if (!post) {
+    return res.status(404).json({ message: "Post not found" });
+  }
+
+  return res.json(post);
+}
+
 async function create(req, res, next) {
   const { title, text } = req.body;
   const authorId = req.user.id;
@@ -27,6 +39,14 @@ async function create(req, res, next) {
 
 async function findAllComments(req, res, next) {
   const comments = await req.context.models.Post.findAllComments(
+    req.params.postId,
+  );
+
+  return res.json(comments);
+}
+
+async function findAllPublishedComments(req, res, next) {
+  const comments = await req.context.models.Post.findAllPublishedComments(
     req.params.postId,
   );
 
@@ -64,8 +84,10 @@ module.exports = {
   findAll,
   findAllPublished,
   findById,
+  findPublishedById,
   create,
   findAllComments,
+  findAllPublishedComments,
   update,
   deletePost,
   publish,

@@ -6,12 +6,15 @@ const router = Router();
 
 router.get("/", controllers.postController.findAllPublished);
 
-router.get("/:postId", controllers.postController.findById);
-router.get("/:postId/comments", controllers.postController.findAllComments);
+router.get("/:postId", controllers.postController.findPublishedById);
+router.get(
+  "/:postId/comments",
+  controllers.postController.findAllPublishedComments,
+);
 
 router.get(
   "/:postId/comments/:commentId",
-  controllers.commentController.findById,
+  controllers.commentController.findPublishedById,
 );
 
 router.post(
