@@ -7,7 +7,7 @@ async function findById(req, res, next) {
   });
 
   if (!comment) {
-    return res.status(404).json({ message: "Comment not found" });
+    return res.status(404).json({ error: "Comment not found" });
   }
   return res.json(comment);
 }

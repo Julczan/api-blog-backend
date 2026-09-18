@@ -12,7 +12,7 @@ async function findById(req, res, next) {
   const post = await req.context.models.Post.findById(req.params.postId);
 
   if (!post) {
-    return res.status(404).json({ message: "Post not found" });
+    return res.status(404).json({ error: "Post not found" });
   }
 
   return res.json(post);
@@ -24,7 +24,7 @@ async function findPublishedById(req, res, next) {
   );
 
   if (!post) {
-    return res.status(404).json({ message: "Post not found" });
+    return res.status(404).json({ error: "Post not found" });
   }
 
   return res.json(post);
