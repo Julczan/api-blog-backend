@@ -6,6 +6,9 @@ class Post {
       include: {
         author: true,
       },
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
     return posts;
   }
@@ -15,6 +18,9 @@ class Post {
       where: { published: true },
       include: {
         author: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
       },
     });
     return posts;
