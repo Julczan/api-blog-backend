@@ -2,13 +2,20 @@ const { prisma } = require("../lib/prisma");
 
 class Post {
   async findAll() {
-    const posts = await prisma.post.findMany({});
+    const posts = await prisma.post.findMany({
+      include: {
+        author: true,
+      },
+    });
     return posts;
   }
 
   async findAllPublished() {
     const posts = await prisma.post.findMany({
       where: { published: true },
+      include: {
+        author: true,
+      },
     });
     return posts;
   }
