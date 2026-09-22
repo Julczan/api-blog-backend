@@ -20,7 +20,13 @@ router.get(
 
 router.get(
   "/posts/:postId/comments",
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   controllers.postController.findAllComments,
+);
+
+router.get(
+  "/posts/:postId/comments/:commentId",
+  controllers.commentController.findById,
 );
 
 router.post(
@@ -29,6 +35,12 @@ router.post(
   controllers.userController.checkRole,
   controllers.userController.checkIfPostAuthor,
   controllers.postController.publish,
+);
+
+router.put(
+  "/posts/:postId/comments/:commentId",
+  passport.authenticate("jwt", { session: false, failWithError: true }),
+  controllers.commentController.update,
 );
 
 module.exports = router;

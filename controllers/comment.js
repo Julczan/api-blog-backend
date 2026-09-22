@@ -47,6 +47,7 @@ async function update(req, res, next) {
     postId,
     text,
   });
+
   return res.json(comment);
 }
 

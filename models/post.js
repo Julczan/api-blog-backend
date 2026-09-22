@@ -70,6 +70,9 @@ class Post {
       include: {
         author: true,
       },
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
     return comments;
   }
@@ -84,6 +87,9 @@ class Post {
       },
       include: {
         author: true,
+      },
+      orderBy: {
+        updatedAt: "desc",
       },
     });
     return comments;
