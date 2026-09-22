@@ -43,4 +43,10 @@ router.put(
   controllers.commentController.update,
 );
 
+router.delete(
+  "/posts/:postId/comments/:commentId",
+  passport.authenticate("jwt", { session: false, failWithError: true }),
+  controllers.commentController.deleteComment,
+);
+
 module.exports = router;
