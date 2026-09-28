@@ -76,19 +76,6 @@ const update = [
   },
 ];
 
-// async function update(req, res, next) {
-//   const { commentId, postId } = req.params;
-//   const { text } = req.body;
-
-//   const comment = await req.context.models.Comment.update({
-//     commentId,
-//     postId,
-//     text,
-//   });
-
-//   return res.json(comment);
-// }
-
 async function deleteComment(req, res, next) {
   const { postId, commentId } = req.params;
   const post = await req.context.models.Comment.delete({ postId, commentId });

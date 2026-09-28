@@ -87,17 +87,25 @@ async function findAllPublishedComments(req, res, next) {
   return res.json(comments);
 }
 
-async function update(req, res, next) {
-  const { postId } = req.params;
-  const { title, text } = req.body;
-  const post = await req.context.models.Post.update({
-    id: postId,
-    title,
-    text,
-  });
-
-  return res.json(post);
-}
+const update = [
+  validateTitle,
+  validateText,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorsArray = errors.errors;
+      return res.status(400).json(errorsArray);
+    }
+    const { title, text } = matchedData(req);
+    const { postId } = req.params;
+    const post = await req.context.models.Post.update({
+      id: postId,
+      title,
+      text,
+    });
+    return res.json(post);
+  },
+];
 
 async function deletePost(req, res, next) {
   const { postId } = req.params;
