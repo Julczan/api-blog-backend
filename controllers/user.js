@@ -83,7 +83,9 @@ async function checkIfPostAuthor(req, res, next) {
   if (req.user.id === authorId) {
     next();
   } else {
-    return res.status(401).json({ error: "AuthenticationError: Unauthorized" });
+    return res
+      .status(401)
+      .json({ error: "AuthenticationError: You are not a post author" });
   }
 }
 
@@ -104,7 +106,9 @@ async function checkIfCommentAuthor(req, res, next) {
   if (req.user.id === authorId) {
     next();
   } else {
-    return res.status(401).json({ error: "AuthenticationError: Unauthorized" });
+    return res
+      .status(401)
+      .json({ error: "AuthenticationError: You are not a comment author" });
   }
 }
 
