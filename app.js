@@ -27,8 +27,9 @@ app.use((error, req, res, next) => {
   return res.status(statusCode).json({ error: error.toString() });
 });
 
-const PORT = 3000;
-app.listen(PORT, (error) => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, "0.0.0.0", (error) => {
   if (error) {
     throw error;
   }
