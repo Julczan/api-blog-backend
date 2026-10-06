@@ -9,7 +9,8 @@
     "studio": "npx prisma studio --config ./prisma7.config.js",
     "migrate": "npx prisma migrate dev",
     "generate": "npx prisma generate",
-    "start": "node app.js"
+    "start": "node app.js",
+    "postinstall": "prisma generate"
   },
   "repository": {
     "type": "git",

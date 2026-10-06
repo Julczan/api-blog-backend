@@ -26,12 +26,7 @@ async function main() {
   //   },
   // });
   // console.log(user);
-  // const allUsers = await prisma.user.findMany({
-  //   include: {
-  //     posts: true,
-  //     comments: true,
-  //   },
-  // });
+  const allUsers = await prisma.post.deleteMany({});
   // console.log("All users:", JSON.stringify(allUsers, null, 2));
 }
 
