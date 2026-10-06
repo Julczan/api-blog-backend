@@ -7,12 +7,16 @@ const routes = require("./routes/index");
 require("dotenv/config");
 require("./config/passport");
 
-const corsOptions = {
-  origin: "https://api-blog-frontend.netlify.app",
-  optionsSuccessStatus: 200,
-};
+const allowedOrigins = [
+  "https://api-blog-frontend.netlify.app",
+  "https://api-blog-author.netlify.app",
+];
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: allowedOrigins,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
