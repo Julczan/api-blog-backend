@@ -8,7 +8,7 @@ require("dotenv/config");
 require("./config/passport");
 
 const corsOptions = {
-  origin: "https://api-blog-frontend.netlify.app/",
+  origin: "https://api-blog-frontend.netlify.app",
   optionsSuccessStatus: 200,
 };
 
