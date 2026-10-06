@@ -7,10 +7,14 @@ const routes = require("./routes/index");
 require("dotenv/config");
 require("./config/passport");
 
-const allowedOrigins = [
+let allowedOrigins = [
   "https://api-blog-frontend.netlify.app",
   "https://api-blog-author.netlify.app",
 ];
+
+if (process.env.NODE_ENV === "development") {
+  allowedOrigins = "*";
+}
 
 app.use(
   cors({
