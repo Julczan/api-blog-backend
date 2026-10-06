@@ -10,7 +10,7 @@
     "migrate": "npx prisma migrate dev",
     "generate": "npx prisma generate",
     "start": "node app.js",
-    "postinstall": "prisma generate"
+    "build": "prisma generate"
   },
   "repository": {
     "type": "git",
